@@ -30,6 +30,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.rvHeroes.apply {
+            layoutManager = LinearLayoutManager(this@MainActivity)
+            adapter = allHeroesAdapter
+        }
         getAllHeroesFromServer()
     }
 
@@ -46,11 +50,7 @@ class MainActivity : AppCompatActivity() {
                     heroesProgressbar.visibility = View.GONE
                     if (response.isSuccessful) {
                         response.body()?.let {
-                            allHeroesAdapter.differ.submitList(it)
-                            rvHeroes.apply {
-                                layoutManager = LinearLayoutManager(this@MainActivity)
-                                adapter = allHeroesAdapter
-                            }
+                            allHeroesAdapter.differ.submitList(it.also { Log.d("TAG", "onResponse: size is  ${it.size}") })
                         }
                     }
                 }
