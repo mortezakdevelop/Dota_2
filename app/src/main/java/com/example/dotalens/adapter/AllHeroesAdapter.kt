@@ -20,10 +20,6 @@ class AllHeroesAdapter: RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var textBinding:ItemTextBinding
     private lateinit var context: Context
 
-    object ViewType{
-        private const val TYPE_HEROES = 0
-    }
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
         return when (viewType){
